@@ -9,12 +9,54 @@ echo   Showing System Member Count Generator
 echo ==========================================
 echo.
 
-if not exist "keys.txt" (
-  echo ERROR: keys.txt was not found in this folder.
-  if exist "keys.template.txt" (
-    echo A template is available: keys.template.txt
-    echo Copy it to keys.txt and fill in your values.
+whoami /groups | find "S-1-5-32-544" >nul
+if not "%ERRORLEVEL%"=="0" (
+  echo Please right-click this file and choose "Run as administrator".
+  echo Then click YES on the Windows popup.
+  echo.
+  if /i not "%NO_PAUSE%"=="1" pause
+  exit /b 1
+)
+
+set "KEY_FILE=keys"
+if not exist "keys" (
+  if exist "keys.txt" (
+    set "KEY_FILE=keys.txt"
+  ) else (
+    echo ERROR: keys file not found.
+    echo.
+    echo Expected file name: keys
+    echo.
+    echo Open the file named "keys", enter your Bridge API values, and save it.
+    echo.
+    if /i not "%NO_PAUSE%"=="1" pause
+    exit /b 1
   )
+)
+
+if "%KEY_FILE%"=="keys" (
+  findstr /C:"YOUR_ENDPOINT_URL" "keys" >nul
+  if not errorlevel 1 (
+    if exist "keys.txt" (
+      set "KEY_FILE=keys.txt"
+      echo Detected placeholder values in keys. Using keys.txt instead.
+      echo.
+    )
+  )
+)
+
+if "%KEY_FILE%"=="keys.txt" (
+  echo Using keys.txt legacy format.
+  echo.
+)
+
+if not "%KEY_FILE%"=="keys.txt" (
+  echo Using keys file.
+  echo.
+)
+
+if not exist "%KEY_FILE%" (
+  echo ERROR: Unable to find keys file.
   echo.
   if /i not "%NO_PAUSE%"=="1" pause
   exit /b 1
@@ -23,7 +65,7 @@ if not exist "keys.txt" (
 echo Running data pull and report generation...
 echo.
 
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\run_member_counts.ps1"
+powershell -NoProfile -ExecutionPolicy Bypass -File ".\run_member_counts.ps1" -KeysFile ".\%KEY_FILE%"
 set "EXIT_CODE=%ERRORLEVEL%"
 
 echo.

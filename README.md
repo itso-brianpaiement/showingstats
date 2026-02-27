@@ -1,82 +1,50 @@
-## Monthly Run Instructions
+## Showing System Member Count - Simple Instructions
 
-### 1) One-click run (recommended)
-Double-click:
+### 1) Download from GitHub
+1. Open the GitHub page for this project.
+2. Click **Code**.
+3. Click **Download ZIP**.
+4. Save the ZIP to your Desktop (or any folder you prefer).
 
+### 2) Unzip the folder
+1. Right-click the ZIP file.
+2. Click **Extract All...**.
+3. Choose where you want the files.
+4. Click **Extract**.
+
+You should now have a normal folder with these files inside, including:
+- `keys`
 - `CLICK ME TO GENERATE.cmd`
 
-This runs everything automatically.
+### 3) Add your Bridge API info
+1. Right-click the file named **keys**.
+2. Click **Open with** > **Notepad**.
+3. Enter your Bridge API values in that file.
+4. Click **File** > **Save**.
+5. Close Notepad.
 
-### 2) Verify keys file
-This script expects a `keys.txt` file in the same folder with at least:
+### 4) Run the report
+1. Right-click **CLICK ME TO GENERATE.cmd**.
+2. Click **Run as administrator**.
+3. When Windows asks for permission, click **Yes**.
+4. Wait for it to finish.
 
-- `Endpoint URL: ...`
-- `Server Token: ...`
+### 5) Find your output files
+The script creates a folder like:
 
-If `keys.txt` is missing, copy `keys.template.txt` to `keys.txt` and fill in your values.
+- `output\February_27_ShowingSystemStats\`
 
-### 3) Run from terminal (optional)
-From PowerShell:
+Inside that folder:
+- `data\` (raw data files)
+- `Showing_System_Member_Count_February.csv` (your finished report)
 
-```powershell
-cd "C:\Users\user\Desktop\ITSO\Member Counts"
-powershell -ExecutionPolicy Bypass -File .\run_member_counts.ps1
-```
+### If Windows blocks the file
+If Smart App Control or Windows blocks the script:
+1. Right-click the downloaded ZIP file.
+2. Click **Properties**.
+3. If you see **Unblock**, check it.
+4. Click **Apply** and **OK**.
+5. Extract the ZIP again and run it.
 
-### 4) Review output files
-Each run creates a month/day folder under:
-
-- `.\output\Month_dd_ShowingSystemStats\`
-Example: `.\output\February_27_ShowingSystemStats\`
-
-Files produced:
-
-- `.\output\Month_dd_ShowingSystemStats\data\summary.csv`
-- `.\output\Month_dd_ShowingSystemStats\data\offices_selected.csv`
-- `.\output\Month_dd_ShowingSystemStats\data\members_detail.csv`
-- `.\output\Month_dd_ShowingSystemStats\data\duplicates_by_name.csv`
-- `.\output\Month_dd_ShowingSystemStats\Showing_System_Member_Count_Month.csv` (template-style output)
-
-### GitHub packaging
-
-- Safe to commit:
-  - `run_member_counts.ps1`
-  - `CLICK ME TO GENERATE.cmd`
-  - `README.md`
-  - `keys.template.txt`
-- Do not commit:
-  - `keys.txt` (contains secrets)
-  - `output\` files
-
-`.gitignore` is included to block these by default.
-
-### What the script counts
-
-- Offices:
-  - Active status (`A` or `Active`)
-  - Source board from `OriginatingSystemName`:
-    - `CAOR` or `Cornerstone` -> `Cornerstone`
-    - `BRREA` or `Brantford` -> `BRREA`
-  - Showing system mapped to:
-    - `BRBY` or `BrokerBay` -> `BrokerBay`
-    - `SA` or `ShowingTime` -> `ShowingTime`
-- Members:
-  - Active status (`A` or `Active`)
-  - `MemberMlsSecurityClass` matches one of:
-    - `F1` (or `BL`)
-    - `F2` (or `BL2`)
-    - `O1` (or `BRM`)
-    - `SP1`, `SP2`, `SP3`, `SP4`, `SP5`
-- Duplicate detection:
-  - Name-based dedupe using normalized first + last name.
-- Template report:
-  - Builds a BrokerBay table with `CAOR`, `BRREA`, totals, cross-board duplicates, and billable total.
-  - Builds a ShowingTime `CAOR` row filtered to members where `MemberMlsId` starts with `WR`, `CA`, or `KW`.
-
-### Optional parameters
-
-```powershell
-.\run_member_counts.ps1 -KeysFile ".\keys.txt" -OutputRoot ".\output" -Top 200
-```
-
-`Top` must be between `1` and `200` (Bridge page limit).
+### Important
+- Do not share the `keys` file publicly. It contains private API credentials.

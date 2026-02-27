@@ -1,11 +1,27 @@
 param(
-    [string]$KeysFile = (Join-Path $PSScriptRoot "keys.txt"),
+    [string]$KeysFile = "",
     [string]$OutputRoot = (Join-Path $PSScriptRoot "output"),
     [int]$Top = 200
 )
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
+
+if ([string]::IsNullOrWhiteSpace($KeysFile)) {
+    $candidateKeys = @(
+        (Join-Path $PSScriptRoot "keys"),
+        (Join-Path $PSScriptRoot "keys.txt")
+    )
+
+    $found = $candidateKeys | Where-Object { Test-Path -LiteralPath $_ } | Select-Object -First 1
+    if ($found) {
+        $KeysFile = $found
+    }
+    else {
+        # Default error target if neither exists.
+        $KeysFile = $candidateKeys[0]
+    }
+}
 
 if ($Top -lt 1 -or $Top -gt 200) {
     throw "Top must be between 1 and 200 (Bridge limit)."
