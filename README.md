@@ -1,10 +1,9 @@
 ## Showing System Member Count - Simple Instructions
 
-### 1) Download from GitHub
-1. Open the GitHub page for this project.
-2. Click **Code**.
-3. Click **Download ZIP**.
-4. Save the ZIP to your Desktop (or any folder you prefer).
+### 1) Download
+1. At the top right of this page click **Code**.
+2. Click **Download ZIP**.
+3. Save the ZIP to your Desktop (or any folder you prefer).
 
 ### 2) Unzip the folder
 1. Right-click the ZIP file.
