@@ -37,13 +37,5 @@ Inside that folder:
 - `data\` (raw data files)
 - `Showing_System_Member_Count_February.csv` (your finished report)
 
-### If Windows blocks the file
-If Smart App Control or Windows blocks the script:
-1. Right-click the downloaded ZIP file.
-2. Click **Properties**.
-3. If you see **Unblock**, check it.
-4. Click **Apply** and **OK**.
-5. Extract the ZIP again and run it.
-
 ### Important
 - Do not share the `keys` file publicly. It contains private API credentials.
