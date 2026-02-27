@@ -1,0 +1,8 @@
+# Local secrets (do not commit)
+keys.txt
+
+# Generated exports
+output/
+
+# Optional local filled report copy
+Showing_System_Member_Count_*.csv
