@@ -35,12 +35,20 @@ if not exist "keys" (
 )
 
 if "%KEY_FILE%"=="keys" (
-  findstr /C:"YOUR_ENDPOINT_URL" "keys" >nul
+  findstr /C:"REPLACE_THIS_WITH_" "keys" >nul
   if not errorlevel 1 (
     if exist "keys.txt" (
       set "KEY_FILE=keys.txt"
       echo Detected placeholder values in keys. Using keys.txt instead.
       echo.
+    ) else (
+      echo ERROR: The keys file still has template values.
+      echo.
+      echo Open the file named keys and replace all REPLACE_THIS_WITH_... values.
+      echo Then save the file and run this script again.
+      echo.
+      if /i not "%NO_PAUSE%"=="1" pause
+      exit /b 1
     )
   )
 )
