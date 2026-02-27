@@ -1,4 +1,4 @@
-Endpoint URL: https://api.bridgedataoutput.com/api/v2/OData/itso
+Endpoint URL: YOUR_ENDPOINT_URL
 Client ID: YOUR_CLIENT_ID
 Client Secret: YOUR_CLIENT_SECRET
 Server Token: YOUR_SERVER_TOKEN
