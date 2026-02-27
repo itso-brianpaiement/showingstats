@@ -204,18 +204,31 @@ function Get-DisplayName {
 }
 
 $config = Read-KeyValueFile -Path $KeysFile
-$endpoint = [string]$config["Endpoint URL"]
+$endpointValue = [string]$config["Endpoint URL"]
 $serverToken = [string]$config["Server Token"]
 
-if ([string]::IsNullOrWhiteSpace($endpoint)) {
+if ([string]::IsNullOrWhiteSpace($endpointValue)) {
     throw "Endpoint URL missing in keys file."
 }
 if ([string]::IsNullOrWhiteSpace($serverToken)) {
     throw "Server Token missing in keys file."
 }
 
-$endpoint = $endpoint.Trim().TrimEnd("/")
-$safeEndpoint = $endpoint
+$endpointValue = $endpointValue.Trim().TrimEnd("/")
+$bridgeBaseODataUrl = "https://api.bridgedataoutput.com/api/v2/OData"
+
+if ($endpointValue -match "^https?://") {
+    # Backward compatibility for older keys files that contain the full URL.
+    $safeEndpoint = $endpointValue
+}
+else {
+    # Preferred format: dataset code only (e.g., itso).
+    $datasetCode = $endpointValue.Trim("/").Trim()
+    if ([string]::IsNullOrWhiteSpace($datasetCode)) {
+        throw "Endpoint URL value is blank. Use dataset code like 'itso'."
+    }
+    $safeEndpoint = "{0}/{1}" -f $bridgeBaseODataUrl, $datasetCode
+}
 
 Write-Host "Pulling offices..."
 
