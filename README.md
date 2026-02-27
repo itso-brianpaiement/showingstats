@@ -1,16 +1,59 @@
-## Showing Stats Package
+## Showing System Member Count - Instructions (Windows and Mac)
 
-This package has two folders:
+### 1) Download
+1. Open this GitHub page.
+2. Click **Code**.
+3. Click **Download ZIP**.
+4. Save the ZIP to your Desktop (or anywhere you want).
 
-- `windows` for Windows users
-- `mac` for macOS users
+### 2) Unzip the folder
+1. Unzip the ZIP file.
+Windows: Right-click ZIP > **Extract All...**
+Mac: Double-click ZIP (or right-click > **Open**).
+2. Open the extracted folder.
+3. Open the folder for your computer:
+- `windows` (if you are on Windows)
+- `mac` (if you are on Mac)
 
-Open the folder for your computer and follow the README inside that folder.
+### 3) Add your Bridge API values in `keys`
+1. Open a browser tab and go to `https://bridgedataoutput.com/`.
+2. Log in to Bridge.
+3. Click **API Access** at the top.
+4. Copy your API values from that page.
+5. Open the `keys` file in your platform folder.
+Windows: Right-click `keys` > **Open with** > **Notepad**
+Mac: Open `keys` in TextEdit
+6. Leave the first line exactly as:
+`Endpoint URL: itso`
+7. Replace only the `REPLACE_THIS_WITH_...` values with your real Bridge values.
+8. Save and close the file.
 
-Quick start:
+Example:
+- `Client ID: REPLACE_THIS_WITH_CLIENT_ID_FROM_BRIDGE`
+- Replace only the part after `Client ID:` with your real Client ID.
 
-1. On GitHub, click **Code**.
-2. Click **Download ZIP**.
-3. Save the ZIP to Desktop (or anywhere you want).
-4. Right-click ZIP and choose **Extract All...**.
-5. Open either `windows` or `mac`.
+### 4) Run the report
+Windows:
+1. Right-click `CLICK ME TO GENERATE.cmd`
+2. Click **Run as administrator**
+3. Click **Yes** on the Windows popup
+
+Mac:
+1. Double-click `CLICK ME TO GENERATE.command`
+2. If blocked, right-click it and choose **Open**, then click **Open**
+
+### 5) Find your output files
+The script creates an output folder like:
+
+- `output/February_27_ShowingSystemStats/`
+
+Inside:
+- `data/` (raw data files)
+- `Showing_System_Member_Count_February.csv` (final report)
+
+### Notes
+- Do not share the `keys` file publicly. It contains private API credentials.
+- Windows and Mac steps are the same except:
+  - Which folder you open (`windows` vs `mac`)
+  - Which launcher you run (`.cmd` vs `.command`)
+  - The admin/security prompt style
