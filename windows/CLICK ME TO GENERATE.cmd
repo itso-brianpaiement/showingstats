@@ -9,15 +9,6 @@ echo   Showing System Member Count Generator
 echo ==========================================
 echo.
 
-whoami /groups | find "S-1-5-32-544" >nul
-if not "%ERRORLEVEL%"=="0" (
-  echo Please right-click this file and choose "Run as administrator".
-  echo Then click YES on the Windows popup.
-  echo.
-  if /i not "%NO_PAUSE%"=="1" pause
-  exit /b 1
-)
-
 set "KEY_FILE=keys"
 if not exist "keys" (
   if exist "keys.txt" (

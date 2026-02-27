@@ -32,10 +32,9 @@ Example:
 - `Client ID: REPLACE_THIS_WITH_CLIENT_ID_FROM_BRIDGE` -> `Client ID: <your real Client ID>`
 
 ### 4) Run the report
-1. Right-click **CLICK ME TO GENERATE.cmd**.
-2. Click **Run as administrator**.
-3. When Windows asks for permission, click **Yes**.
-4. Wait for it to finish.
+1. Double-click **CLICK ME TO GENERATE.cmd**.
+2. If Windows warns about unknown publisher, click **More info** then **Run anyway**.
+3. Wait for it to finish.
 
 ### 5) Find your output files
 The script creates a folder like:

@@ -25,6 +25,8 @@
 2. If macOS blocks it, right-click it and choose **Open**, then click **Open**.
 3. Wait for it to finish.
 
+This Mac version does not require PowerShell.
+
 ### 5) Find your output
 The script creates:
 

@@ -34,9 +34,8 @@ Example:
 
 ### 4) Run the report
 Windows:
-1. Right-click `CLICK ME TO GENERATE.cmd`
-2. Click **Run as administrator**
-3. Click **Yes** on the Windows popup
+1. Double-click `CLICK ME TO GENERATE.cmd`
+2. If Windows warns about unknown publisher, click **More info** then **Run anyway**
 
 Mac:
 1. Double-click `CLICK ME TO GENERATE.command`
@@ -53,7 +52,8 @@ Inside:
 
 ### Notes
 - Do not share the `keys` file publicly. It contains private API credentials.
+- The Mac launcher does not require PowerShell.
 - Windows and Mac steps are the same except:
   - Which folder you open (`windows` vs `mac`)
   - Which launcher you run (`.cmd` vs `.command`)
-  - The admin/security prompt style
+  - The security warning screen style

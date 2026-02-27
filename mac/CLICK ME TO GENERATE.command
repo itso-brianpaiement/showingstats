@@ -42,11 +42,11 @@ if [[ "$KEY_FILE" == "keys" ]] && grep -q "REPLACE_THIS_WITH_" "keys"; then
   fi
 fi
 
-if ! command -v pwsh >/dev/null 2>&1; then
-  echo "ERROR: PowerShell (pwsh) is not installed."
+if [[ ! -x "/usr/bin/python3" ]]; then
+  echo "ERROR: Python3 was not found at /usr/bin/python3."
   echo
-  echo "Please install PowerShell 7, then run this file again."
-  echo "Download: https://learn.microsoft.com/powershell/scripting/install/installing-powershell-on-macos"
+  echo "This Mac runner needs python3 that normally ships with macOS."
+  echo "If your Mac does not have it, contact IT for a packaged app build."
   echo
   read -n 1 -r -p "Press any key to close..."
   echo
@@ -56,7 +56,7 @@ fi
 echo "Running data pull and report generation..."
 echo
 
-pwsh -NoProfile -File "./run_member_counts.ps1" -KeysFile "./${KEY_FILE}"
+/usr/bin/python3 "./run_member_counts.py" --keys-file "./${KEY_FILE}"
 EXIT_CODE=$?
 
 echo
